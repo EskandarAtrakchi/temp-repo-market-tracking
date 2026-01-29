@@ -1,11 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Hello World</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BERA Token Release Countdown</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .countdown-container {
+      text-align: center;
+      background: #020617;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #94a3b8;
+      margin-bottom: 30px;
+    }
+
+    .timer {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .time-box {
+      background: #0f172a;
+      padding: 20px;
+      border-radius: 12px;
+      min-width: 90px;
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .label {
+      font-size: 0.75rem;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, World!</h1>
-  <p>This is my first HTML page.</p>
+
+  <div class="countdown-container">
+    <h1>BERA Token Release</h1>
+    <p>Unlock happening on 6 Feb 2026 at 13:00 UTC</p>
+
+    <div class="timer">
+      <div class="time-box">
+        <span id="days">0</span>
+        <div class="label">Days</div>
+      </div>
+      <div class="time-box">
+        <span id="hours">0</span>
+        <div class="label">Hours</div>
+      </div>
+      <div class="time-box">
+        <span id="minutes">0</span>
+        <div class="label">Minutes</div>
+      </div>
+      <div class="time-box">
+        <span id="seconds">0</span>
+        <div class="label">Seconds</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 🔧 BERA Token Unlock: Feb 6, 2026 at 13:00 UTC
+    const releaseDate = new Date("2026-02-06T13:00:00Z").getTime();
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = releaseDate - now;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        document.querySelector(".timer").innerHTML = "<h2>🚀 Token Released</h2>";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    }, 1000);
+  </script>
+
 </body>
 </html>
